@@ -25,7 +25,6 @@ trap "rm -r $TEMPDIR" EXIT
 # In case of ls is an alias for "ls --color"
 alias ls="$(which ls)";
 
-# mkdir /tmp/hs/
 cp /package/*.nc "$TEMPDIR/."
 sync
 
@@ -88,20 +87,18 @@ cp -R ./* /webserv/.
 sync
 chown -R www-data:www-data /webserv
 
+#global.ini file will be mount into from config map
+#cd /webserv/BEMS_2.0/Conf
+#cp ./global.conf /webserv/GlobalWorkers/conf/global.conf
 
-cd /webserv/BEMS_2.0/Conf
-cp ./global.conf /webserv/GlobalWorkers/conf/global.conf
+#cd /webserv/BEMS_2.0/Conf/ini
+#cp ./global.test.ini ./global.ini
+#cp ./global.test.ini /webserv/GlobalWorkers/conf/ini/global.ini
+#rm -rf `ls -I global.ini`
 
-cd /webserv/BEMS_2.0/Conf/ini
-cp ./global.test.ini ./global.ini
-cp ./global.test.ini /webserv/GlobalWorkers/conf/ini/global.ini
-rm -rf `ls -I global.ini`
+#sync
 
-
-sync
-
-#rm -R /tmp/hs
-# rm -R "$TEMPDIR"
+rm -R "$TEMPDIR"
 apache_log_path="/var/log/apache2"
 if test ! -e "$apache_log_path" ;then
    mkdir "$apache_log_path"
